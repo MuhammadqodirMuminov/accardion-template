@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import QuestionList from "./components/question-list";
+import questions from "./service/api";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const [data, setData] = useState(questions);
+
+	return (
+		<main className="w-100 h-100 bg-primary p-5">
+			<div className="w-75 h-75 bg-light d-flex align-items-center mx-auto rounded p-5 gap-3">
+				<div className=" w-25 text-center ">
+					<h1>All question and responces for login !</h1>
+				</div>
+				<div className="w-75 border-start border-4 px-3">
+					{data.map((item) => {
+						return <QuestionList key={item.id} {...item} />;
+					})}
+				</div>
+			</div>
+		</main>
+	);
+};
 
 export default App;
